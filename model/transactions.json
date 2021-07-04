@@ -43,7 +43,7 @@
   },
 });
 
-const transactionSchema({
+const transactionSchema = new Schema({
   time_id: {
     type: Number,
     default:Date.now(), // використовувати як ID транзакції, а також для пошуку по датах/місяцях/роках
