@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "date": "03.07.2021",
+    "type": "increment",
+    "category": "Регулярный доход",
+    "comment": "Бонус за июнь",
+    "sum": "8000",
+    "balance": "14900"
+  },
+  {
+    "id": 2,
+    "name": "04.07.2021",
+    "type": "decrement",
+    "category": "Машина",
+    "comment": "Масло",
+    "sum": "1000",
+    "balance": "13900"
+  }
+]
