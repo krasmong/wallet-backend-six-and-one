@@ -18,3 +18,65 @@
     "balance": "13900"
   }
 ]
+
+/*const userSchema = new Schema({
+   name: {
+    type: String,
+    required: [true, 'Name is required'],
+  },
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+  },
+  email: {
+    type: String,
+    required: [true, 'Email is required'],
+    unique: true,
+    validate(value) {
+      const re = /\S+@\S+\.\S+/g;
+      return re.test(String(value).toLowerCase());
+    }
+  },
+  token: {
+    type: String,
+    default: null,
+  },
+});
+
+const transactionSchema({
+  time_id: {
+    type: Number,
+    default:Date.now(), // використовувати як ID транзакції, а також для пошуку по датах/місяцях/роках
+  },
+  owner: {
+    type: SchemaTypes.ObjectId,
+    ref: 'user',
+  },
+  type:{
+  type: String,
+  enum: ["DEPOSIT","WITHDRAW","CANCELED"],
+  default:"WITHDRAW",
+  },
+  category:{
+    type: String,
+    enum: ["MAIN","MEAL","AUTO","DEVELOPMENT","CHIDREN","HOME","EDUCATION","OTHER"],//але не впевнений, що тут enum, мені здається це має бути поле, куди записуються всі значення, які вводив user (повтори відловлюються) а потім відображаються як масив введених значень, тобто має бути можливість вводу
+    default:"MAIN",
+  },
+    comment: {
+    type: String,
+    maxLength:80,
+    validate(value) {
+      const re = /^[а-яА-ЯёЁa-zA-Z0-9]+$/g;
+      return re.test(String(value).toLowerCase());
+    },
+    default: "",
+  },
+  amount: {
+    type: Number,
+    required: [true, 'Amount of transaction is required'],
+  },
+  balance: {
+    type: Number,
+  }
+});
+*/
