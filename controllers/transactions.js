@@ -1,10 +1,18 @@
-// const Contacts = require('../repositories/transaction')
+const Transactions = require('../repositories/transaction')
 
 // const fs = require('fs/promises')
 // const path = require('path')
 // const contacts = require('./transactions.json')
 
-const listTransactions = async () => {}
+const listTransactions = async (req, res, next) => {
+  console.log('Hi')
+  try {
+    const contacts = await Transactions.listContacts()
+    return res.json({ status: 'success', code: 200, data: { contacts } })
+  } catch (e) {
+    next(e)
+  }
+}
 
 const getTransactionById = async (transactionId) => {}
 
