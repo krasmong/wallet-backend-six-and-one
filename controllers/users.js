@@ -17,12 +17,12 @@ const register = async (req, res, next) => {
       })
     };
 
-    const { email, subscription } = await Users.create(req.body)
+    const { email, name } = await Users.create(req.body)
 
     return res.status(HttpCode.CREATED).json({
       status: 'success',
       code: HttpCode.CREATED,
-      data: { email, subscription }
+      data: { email, name }
     })
   } catch (e) {
     next(e)
@@ -42,12 +42,12 @@ const login = async (req, res, next) => {
       })
     };
 
-    const { id, email, subscription } = user
+    const { id, email, name } = user
     const payload = { id }
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '2h' })
 
     await Users.updateToken(id, token)
-    return res.json({ status: 'success', code: HttpCode.OK, data: { token, user: { email, subscription } } })
+    return res.json({ status: 'success', code: HttpCode.OK, data: { token, user: { email, name } } })
   } catch (e) {
     next(e)
   };
@@ -65,12 +65,12 @@ const current = async (req, res, next) => {
       })
     };
 
-    const { email, subscription } = user
+    const { email, name } = user
 
     return res.status(HttpCode.OK).json({
       status: 'success',
       code: HttpCode.OK,
-      data: { email, subscription }
+      data: { email, name }
     })
   } catch (e) {
     next(e)
