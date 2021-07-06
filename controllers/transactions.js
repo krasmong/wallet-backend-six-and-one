@@ -7,7 +7,7 @@ const Transactions = require('../repositories/transactions')
 const listTransactions = async (req, res, next) => {
   try {
     const userId = req.user.id
-    const { docs: contacts, ...rest } = await Transactions.listContacts(
+    const { docs: contacts, ...rest } = await Transactions.listTransactions(
       userId,
       req.query
     )
