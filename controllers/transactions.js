@@ -5,16 +5,13 @@ const Transactions = require('../repositories/transactions')
 // const contacts = require('./transactions.json')
 
 const listTransactions = async (req, res, next) => {
+  console.log('Hi')
   try {
-    const userId = req.user.id
-    const { docs: contacts, ...rest } = await Transactions.listTransactions(
-      userId,
-      req.query
-    )
+    const transactions = await Transactions.listTransactions()
     return res.json({
       status: 'success',
       code: 200,
-      data: { contacts, ...rest },
+      data: { transactions },
     })
   } catch (e) {
     next(e)
