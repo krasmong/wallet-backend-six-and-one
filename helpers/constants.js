@@ -12,4 +12,4 @@ const HttpCode = {
   INTERNAL_SERVER_ERROR: 500,
 }
 
-module.exports = HttpCode
+module.exports = { HttpCode }
