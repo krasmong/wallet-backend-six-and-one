@@ -1,6 +1,5 @@
 const Joi = require('joi')
 const mongoose = require('mongoose')
-const { Subscription } = require('../helpers/constants')
 
 const passwordRegExp = '^[-\\.\\$\\#\\w]*$'
 
