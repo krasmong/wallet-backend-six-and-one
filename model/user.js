@@ -6,9 +6,10 @@ const SALT_WORK_FACTOR = 9
 const userSchema = new Schema({
   name: {
     type: String,
-    required: [true, 'Name is required'],
+    minLength: 1,
+    maxLength: 12,
     validate(value) {
-      const re = /[A-Za-zА-Яа-яЁёЄє']/g
+      const re = /[A-Za-zА-Яа-яЁёЄє']*/g
       return re.test(String(value))
     },
   },
