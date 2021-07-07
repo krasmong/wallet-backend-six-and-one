@@ -2,10 +2,12 @@ const Joi = require('joi')
 const mongoose = require('mongoose')
 
 const passwordRegExp = '^[-\\.\\$\\#\\w]*$'
+const nameRegExp = "^[A-Za-zА-Яа-яЁёЄє\\']*$"
 
 const schemaUserCreate = Joi.object({
 
   name: Joi.string()
+    .pattern(new RegExp(nameRegExp))
     .min(1)
     .max(12)
     .required(),
@@ -25,7 +27,7 @@ const schemaUserCreate = Joi.object({
     .optional(),
 
 })
-  .with('email', 'password')
+  .with('email', ['password', 'name'])
 
 const schemaUserLogin = Joi.object({
 
