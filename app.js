@@ -1,8 +1,8 @@
 const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
-
-// const transactionsRouter = require('./routes/api/transactions')
+const swaggerUI = require('swagger-ui-express')
+const { swaggerSpec } = require('./helpers/swaggerDoc')
 
 const app = express()
 
@@ -13,6 +13,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/api', require('./routes/api/'))
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 
 app.use((req, res) => {
   res.status(404).json({ status: 'error', code: 404, message: 'Not found' })
