@@ -1,19 +1,36 @@
 const Transactions = require('../repositories/transactions')
 
-// const fs = require('fs/promises')
-// const path = require('path')
-// const contacts = require('./transactions.json')
-
 const listTransactions = async (req, res, next) => {
   console.log('Hi')
   try {
-    const transactions = await Transactions.listTransactions()
+    const userId = req.user.id
+    const { docs: transactions, ...rest } = await Transactions.listTransactions(
+      userId,
+      req.query
+    )
     return res.json({
       status: 'success',
       code: 200,
-      data: { transactions },
+      data: { transactions, ...rest },
     })
   } catch (e) {
+    next(e)
+  }
+}
+
+const addTransaction = async (req, res, next) => {
+  try {
+    const userId = req.user.id
+    const transaction = await Transactions.addTransaction(userId, req.body)
+    res.status(201).json({
+      status: 'success',
+      code: 201,
+      data: { transaction },
+    })
+  } catch (e) {
+    if (e.time_id === 'ValidationError') {
+      e.status = 400
+    }
     next(e)
   }
 }
@@ -22,14 +39,12 @@ const getTransactionById = async (transactionId) => {}
 
 const removeTransaction = async (transactionId) => {}
 
-const addTransaction = async (body) => {}
-
 const updateTransaction = async (transactionId, body) => {}
 
 module.exports = {
   listTransactions,
+  addTransaction,
   getTransactionById,
   removeTransaction,
-  addTransaction,
   updateTransaction,
 }
