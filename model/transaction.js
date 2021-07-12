@@ -41,6 +41,7 @@ const transactionSchema = new Schema(
     },
     balance: {
       type: Number,
+      // min: 0,
     },
   },
   {
@@ -57,7 +58,7 @@ const transactionSchema = new Schema(
   }
 )
 transactionSchema.virtual('info').get(function () {
-  return `Transaction details: ${this.time_id}. type: ${this.type}, category: ${this.category}, comment: ${this.comment}, amount: ${this.amount} , balance: ${this.balance}`
+  return `Transaction details of user ${this.owner}: ${this.time_id}, type: ${this.type}, category: ${this.category}, comment: ${this.comment}, amount: ${this.amount} , balance: ${this.balance}`
 })
 
 transactionSchema.path('comment').validate((value) => {

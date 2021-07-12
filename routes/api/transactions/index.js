@@ -1,35 +1,19 @@
 const express = require('express')
 const router = express.Router()
-
 const controller = require('../../../controllers/transactions')
+const guard = require('../../../helpers/guard')
 
-// const Transactions = require('../../model')
-// const {
-//   validationCreateTransaction,
-//   validationUpdateTransaction,
-// } = require('./validation')
+// const { validationCreateTransaction } = require('./validation')
 
 router.use((req, res, next) => {
   console.log(req.url)
   next()
 })
 
-router.get('/', controller.listTransactions)
+router
+  .get('/', guard, controller.listTransactions)
+  .post('/', guard, controller.addTransaction)
 
-router.get('/:transactionId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.delete('/:transactionId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.patch('/:transactionId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.get('/:transactionId', controller.getTransactionById)
 
 module.exports = router
