@@ -2,7 +2,7 @@ const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
 const swaggerUI = require('swagger-ui-express')
-const { swaggerSpec } = require('./helpers/swaggerDoc')
+const { swaggerSpec } = require('./config/swaggerDoc')
 
 const app = express()
 

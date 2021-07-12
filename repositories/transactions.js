@@ -33,8 +33,13 @@ const listTransactions = async (userId, query) => {
 }
 
 const addTransaction = async (userId, body) => {
+  // const lastTransactionBalance =
   // const currentBalance =
-  const result = await Transaction.create({ owner: userId, ...body })
+  const result = await Transaction.create({
+    owner: userId,
+    ...body,
+    balance: 0,
+  })
   return result
 }
 
