@@ -5,7 +5,11 @@ const transactionSchema = new Schema(
   {
     time_id: {
       type: Number,
-      default: Date.now(), // використовувати як ID транзакції, а також для пошуку по датах/місяцях/роках
+      default: Date.now(),
+    },
+    date: {
+      type: String,
+      required: true,
     },
     owner: {
       type: SchemaTypes.ObjectId,
@@ -41,7 +45,7 @@ const transactionSchema = new Schema(
     },
     balance: {
       type: Number,
-      // min: 0,
+      min: 0,
     },
   },
   {
