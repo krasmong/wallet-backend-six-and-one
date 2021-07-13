@@ -11,6 +11,10 @@ const transactionSchema = new Schema(
       type: SchemaTypes.ObjectId,
       ref: 'user',
     },
+    // type: {
+    //   type: Boolean,
+    //   default: false,
+    // },
     type: {
       type: String,
       enum: ['DEPOSIT', 'WITHDRAW', 'CANCELED'],
@@ -41,12 +45,13 @@ const transactionSchema = new Schema(
     },
     amount: {
       type: Number,
+      min: 0,
       required: [true, 'Amount of transaction is required'],
     },
     balance: {
       type: Number,
-      required: true,
       min: 0,
+      required: true,
     },
   },
   {
