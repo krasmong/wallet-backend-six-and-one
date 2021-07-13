@@ -12,6 +12,7 @@ router.use((req, res, next) => {
 
 router
   .get('/', guard, controller.listTransactions)
+  .get('/categories', guard, controller.categoryList)
   .post('/', guard, validationCreateTransaction, controller.addTransaction)
 
 router.get('/:transactionId', controller.getTransactionById)
