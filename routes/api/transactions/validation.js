@@ -2,9 +2,8 @@ const Joi = require('joi')
 const mongoose = require('mongoose')
 
 const schemaCreateTransaction = Joi.object({
-  date: Joi.date().required(),
+  date: Joi.string().required(),
   type: Joi.string().required(),
-  // type: Joi.boolean().required(),
   category: Joi.string().required(),
   comment: Joi.string().alphanum().min(3).max(80).required(),
   amount: Joi.number().required(),
