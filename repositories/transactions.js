@@ -23,6 +23,18 @@ const listTransactions = async (userId, query) => {
   return results
 }
 
+const categoryList = async (userId, body) => {
+  const getTransactionList = await Transaction.find({ owner: userId })
+  const result = [
+    ...new Set(
+      getTransactionList.map(({ category }) => {
+        return category
+      })
+    ),
+  ]
+  return result
+}
+
 const addTransaction = async (userId, body) => {
   const getTransactionList = await Transaction.find({ owner: userId })
   let lastTransactionBalance = 0
@@ -53,5 +65,6 @@ const addTransaction = async (userId, body) => {
 
 module.exports = {
   listTransactions,
+  categoryList,
   addTransaction,
 }
