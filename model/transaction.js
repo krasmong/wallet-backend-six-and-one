@@ -11,10 +11,6 @@ const transactionSchema = new Schema(
       type: SchemaTypes.ObjectId,
       ref: 'user',
     },
-    // type: {
-    //   type: Boolean,
-    //   default: false,
-    // },
     type: {
       type: String,
       enum: ['DEPOSIT', 'WITHDRAW', 'CANCELED'],
@@ -24,20 +20,6 @@ const transactionSchema = new Schema(
       type: String,
       required: true,
     },
-    // category: {
-    //   type: String,
-    //   enum: [
-    //     'MAIN',
-    //     'MEAL',
-    //     'AUTO',
-    //     'DEVELOPMENT',
-    //     'CHILDREN',
-    //     'HOME',
-    //     'EDUCATION',
-    //     'OTHER',
-    //   ], // але не впевнений, що тут enum, мені здається це має бути поле, куди записуються всі значення, які вводив user (повтори відловлюються) а потім відображаються як масив введених значень, тобто має бути можливість вводу
-    //   default: 'MAIN',
-    // },
     comment: {
       type: String,
       maxLength: 80,

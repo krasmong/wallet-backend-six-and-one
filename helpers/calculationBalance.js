@@ -1,32 +1,23 @@
-const Transaction = require('../model/transaction')
+// const Transaction = require('../model/transaction')
 
-const getLastBalance = async (createdAt, userId) => {
-  const lastTransaction = await Transaction.find({
-    date: { $lt: createdAt },
-    owner: userId,
-  })
-    .sort({ createdAt: -1 })
-    .limit(1)
-  if (!lastTransaction || lastTransaction.length === 0) {
-    return 0
-  } else return lastTransaction[0].balance
-}
+// const getLastBalance = async (createdAt, userId) => {
+//   const lastTransaction = await Transaction.find({
+//     date: { $lt: createdAt },
+//     owner: userId,
+//   })
+//     .sort({ createdAt: -1 })
+//     .limit(1)
+//   if (!lastTransaction || lastTransaction.length === 0) {
+//     return 0
+//   } else return lastTransaction[0].balance
+// }
 
 const calculationCurrentBalance = (balance, body) => {
   if (body.type === 'DEPOSIT') {
-    const newBalanceDep = balance + body.amount
-
-    console.log('body.amount', body.amount)
-    console.log('balance', balance)
-    console.log('newBalanceDep', newBalanceDep)
-
-    return newBalanceDep
+    return balance + body.amount
   }
   if (body.type === 'WITHDRAW') {
-    const newBalanceWit = balance - body.amount
-
-    console.log('newBalanceWit', newBalanceWit)
-    return newBalanceWit
+    return balance - body.amount
   }
 }
 
@@ -64,7 +55,6 @@ const calculationCurrentBalance = (balance, body) => {
 // }
 
 module.exports = {
-  getLastBalance,
   calculationCurrentBalance,
   // recalculationBalance,
 }
