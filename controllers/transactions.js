@@ -18,14 +18,17 @@ const listTransactions = async (req, res, next) => {
   }
 }
 
-const addTransaction = async (req, res, next) => {
+const categoryList = async (req, res, next) => {
   try {
     const userId = req.user.id
-    const transaction = await Transactions.addTransaction(userId, req.body)
-    res.status(201).json({
+    const { docs: transactions, ...rest } = await Transactions.categoryList(
+      userId,
+      req.body
+    )
+    res.status(200).json({
       status: 'success',
-      code: 201,
-      data: { transaction },
+      code: 200,
+      data: { transactions, ...rest },
     })
   } catch (e) {
     if (e.date === 'ValidationError') {
@@ -35,19 +38,14 @@ const addTransaction = async (req, res, next) => {
   }
 }
 
-const categoryList = async (req, res, next) => {
+const addTransaction = async (req, res, next) => {
   try {
     const userId = req.user.id
-    // console.log('41 result', userId)
-    const transactionList = await Transactions.listTransactions(userId)
-    console.log('43 result', transactionList)
-    const result = transactionList.map(({ category }) => {
-      return category
-    })
-    res.status(200).json({
+    const transaction = await Transactions.addTransaction(userId, req.body)
+    res.status(201).json({
       status: 'success',
-      code: 200,
-      data: result,
+      code: 201,
+      data: { transaction },
     })
   } catch (e) {
     if (e.date === 'ValidationError') {
