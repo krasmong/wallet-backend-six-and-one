@@ -1,4 +1,5 @@
 const Transaction = require('../model/transaction')
+const TransactionCategory = require('./transactionCategories')
 const { calculationCurrentBalance } = require('../helpers/calculationBalance')
 
 // const listTransactions = async (userId) => {
@@ -23,17 +24,17 @@ const listTransactions = async (userId, query) => {
   return results
 }
 
-const categoryList = async (userId, body) => {
-  const getTransactionList = await Transaction.find({ owner: userId })
-  const result = [
-    ...new Set(
-      getTransactionList.map(({ category }) => {
-        return category
-      })
-    ),
-  ]
-  return result
-}
+// const categoryList = async (userId, body) => {
+//   const getTransactionList = await Transaction.find({ owner: userId })
+//   const result = [
+//     ...new Set(
+//       getTransactionList.map(({ category }) => {
+//         return category
+//       })
+//     ),
+//   ]
+//   return result
+// }
 
 const addTransaction = async (userId, body) => {
   const getTransactionList = await Transaction.find({ owner: userId })
@@ -42,6 +43,9 @@ const addTransaction = async (userId, body) => {
     lastTransactionBalance =
       getTransactionList[getTransactionList.length - 1].balance
   }
+
+  TransactionCategory.addTransactionCat(userId, body)
+
   if (lastTransactionBalance - body.amount < 0 && body.type === 'WITHDRAW') {
     const result = await Transaction.create({
       ...body,
@@ -65,6 +69,6 @@ const addTransaction = async (userId, body) => {
 
 module.exports = {
   listTransactions,
-  categoryList,
+  // categoryList,
   addTransaction,
 }

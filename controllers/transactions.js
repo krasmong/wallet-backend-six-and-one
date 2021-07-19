@@ -1,4 +1,5 @@
 const Transactions = require('../repositories/transactions')
+const TransactionCategories = require('../repositories/transactionCategories')
 
 const listTransactions = async (req, res, next) => {
   console.log('Hi')
@@ -21,14 +22,14 @@ const listTransactions = async (req, res, next) => {
 const categoryList = async (req, res, next) => {
   try {
     const userId = req.user.id
-    const { docs: transactions, ...rest } = await Transactions.categoryList(
+    const categories = await TransactionCategories.getCategoryList(
       userId,
       req.body
     )
     res.status(200).json({
       status: 'success',
       code: 200,
-      data: { transactions, ...rest },
+      data: { categories },
     })
   } catch (e) {
     if (e.date === 'ValidationError') {
