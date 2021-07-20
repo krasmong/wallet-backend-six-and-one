@@ -3,10 +3,21 @@ const mongoosePaginate = require('mongoose-paginate-v2')
 
 const transactionSchema = new Schema(
   {
-    date: {
-      type: String,
-      required: true,
-    },
+    // date: {
+    //   type: String,
+    //   required: true,
+    // },
+
+    // date: {
+    //   day: { type: String, required: true },
+    //   month: { type: String, required: true },
+    //   year: { type: String, required: true },
+    // },
+
+    day: { type: String, required: true },
+    month: { type: String, required: true },
+    year: { type: String, required: true },
+
     owner: {
       type: SchemaTypes.ObjectId,
       ref: 'user',
