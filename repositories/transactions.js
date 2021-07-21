@@ -18,7 +18,7 @@ const listTransactions = async (userId, query) => {
     page = 1,
   } = query
 
-  console.log('query ', month)
+  // console.log('query ', month)
   // console.log('24 sortByMonth ', query.sortByMonth)
 
   // const { month, year } = Transaction.date
@@ -26,16 +26,17 @@ const listTransactions = async (userId, query) => {
   const optionsSearch = {
     owner: userId,
     // type: 'WITHDRAW',
+    ...(month && { month }),
+    ...(year && { year }),
   }
 
-  if (month !== null && year !== null) {
-    optionsSearch.month = month
-    optionsSearch.year = year
-  }
-  if (year !== null && month === null) {
-    optionsSearch.year = year
-  }
-
+  // if (month !== null && year !== null) {
+  //   optionsSearch.month = month
+  //   optionsSearch.year = year
+  // }
+  // if (year !== null && month === null) {
+  //   optionsSearch.year = year
+  // }
   const results = await Transaction.paginate(optionsSearch, {
     limit,
     page,

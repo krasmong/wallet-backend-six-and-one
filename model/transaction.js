@@ -57,12 +57,12 @@ const transactionSchema = new Schema(
         return ret
       },
     },
-    toObject: { virtuals: true },
+    // toObject: { virtuals: true },
   }
 )
-transactionSchema.virtual('info').get(function () {
-  return `Transaction details of user: ${this.owner}: balance: ${this.balance}, ${this.date}, type: ${this.type}, category: ${this.category}, comment: ${this.comment}, amount: ${this.amount} ,`
-})
+// transactionSchema.virtual('info').get(function () {
+//   return `Transaction details of user: ${this.owner}: balance: ${this.balance}, type: ${this.type}, category: ${this.category}, comment: ${this.comment}, amount: ${this.amount} ,`
+// })
 
 transactionSchema.path('comment').validate((value) => {
   const re = /^[а-яА-ЯёЁa-zA-Z0-9]+$/g

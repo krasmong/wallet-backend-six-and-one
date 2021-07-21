@@ -4,7 +4,7 @@ const TransactionCategories = require('../repositories/transactionCategories')
 const listTransactions = async (req, res, next) => {
   console.log('Hi')
   try {
-    console.log('6 req.query', req.query)
+    // console.log('tr contr 7 req.query', req.query)
 
     const userId = req.user.id
 

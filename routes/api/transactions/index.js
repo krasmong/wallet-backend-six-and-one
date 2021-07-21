@@ -1,9 +1,9 @@
-const express = require("express")
+const express = require('express')
 const router = express.Router()
-const controller = require("../../../controllers/transactions")
-const guard = require("../../../helpers/guard")
+const controller = require('../../../controllers/transactions')
+const guard = require('../../../helpers/guard')
 
-const { validationCreateTransaction } = require("./validation")
+const { validationCreateTransaction } = require('./validation')
 
 router.use((req, res, next) => {
   console.log(req.url)
@@ -11,11 +11,11 @@ router.use((req, res, next) => {
 })
 
 router
-  .get("/", guard, controller.listTransactions)
-  .get("/categories", guard, controller.categoryList)
-  .post("/", guard, validationCreateTransaction, controller.addTransaction)
+  .get('/', guard, controller.listTransactions)
+  .get('/categories', guard, controller.categoryList)
+  .post('/', guard, validationCreateTransaction, controller.addTransaction)
 
-router.get("/:transactionId", controller.getTransactionById)
+router.get('/:transactionId', controller.getTransactionById)
 
 module.exports = router
 
@@ -35,7 +35,7 @@ module.exports = router
  *      properties:
  *        _id:
  *          type: string
- *          description: Сгенерированный бекендом уникальный идентификатор.
+ *          description: Сгенерированный бэкендом уникальный идентификатор.
  *        date:
  *          type: string
  *          description: Дата транзакции.
@@ -47,13 +47,13 @@ module.exports = router
  *          description: Категория транзакции.
  *        comment:
  *          type: string
- *          description: Коментарий для транзакции.
+ *          description: Комментарий для транзакции.
  *        amount:
  *          type: number
  *          description: Сумма транзакции.
  *        balance:
  *          type: number
- *          description: Количество денег на счету пользователя после совершения транзакции, возваращает Back end
+ *          description: Количество денег на счету пользователя после совершения транзакции, возвращает Back end
  *      example:
  *        _id: erglhllbl4565lbjjghj
  *        date: 01.01.2021
@@ -110,7 +110,7 @@ module.exports = router
  *                        example: На еду
  *                      comment:
  *                        type: string
- *                        description: Коментарий для транзакции.
+ *                        description: Комментарий для транзакции.
  *                        example: Пельмешки, картофан, корм для котяры
  *                      amount:
  *                        type: number
@@ -174,7 +174,7 @@ module.exports = router
  *                  example: На еду
  *                comment:
  *                  type: string
- *                  description: Коментарий для транзакции.
+ *                  description: Комментарий для транзакции.
  *                  example: Пельмешки, картофан, корм для котяры
  *                amount:
  *                  type: number
@@ -227,7 +227,7 @@ module.exports = router
  *                example: Зарплата.
  *              comment:
  *                type: string
- *                description: Коментарий для транзакции.
+ *                description: Комментарий для транзакции.
  *                example: Заработано честным трудом на любимой работе))
  *              amount:
  *                type: number
@@ -261,7 +261,7 @@ module.exports = router
  *                      example: Зарплата.
  *                    comment:
  *                      type: string
- *                      description: Коментарий для транзакции.
+ *                      description: Комментарий для транзакции.
  *                      example: Заработано честным трудом на любимой работе))
  *                    amount:
  *                      type: number
