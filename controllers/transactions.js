@@ -4,7 +4,10 @@ const TransactionCategories = require('../repositories/transactionCategories')
 const listTransactions = async (req, res, next) => {
   console.log('Hi')
   try {
+    // console.log('tr contr 7 req.query', req.query)
+
     const userId = req.user.id
+
     const { docs: transactions, ...rest } = await Transactions.listTransactions(
       userId,
       req.query

@@ -3,10 +3,21 @@ const mongoosePaginate = require('mongoose-paginate-v2')
 
 const transactionSchema = new Schema(
   {
-    date: {
-      type: String,
-      required: true,
-    },
+    // date: {
+    //   type: String,
+    //   required: true,
+    // },
+
+    // date: {
+    //   day: { type: String, required: true },
+    //   month: { type: String, required: true },
+    //   year: { type: String, required: true },
+    // },
+
+    day: { type: String, required: true },
+    month: { type: String, required: true },
+    year: { type: String, required: true },
+
     owner: {
       type: SchemaTypes.ObjectId,
       ref: 'user',
@@ -46,12 +57,12 @@ const transactionSchema = new Schema(
         return ret
       },
     },
-    toObject: { virtuals: true },
+    // toObject: { virtuals: true },
   }
 )
-transactionSchema.virtual('info').get(function () {
-  return `Transaction details of user: ${this.owner}: balance: ${this.balance}, ${this.date}, type: ${this.type}, category: ${this.category}, comment: ${this.comment}, amount: ${this.amount} ,`
-})
+// transactionSchema.virtual('info').get(function () {
+//   return `Transaction details of user: ${this.owner}: balance: ${this.balance}, type: ${this.type}, category: ${this.category}, comment: ${this.comment}, amount: ${this.amount} ,`
+// })
 
 transactionSchema.path('comment').validate((value) => {
   const re = /^[а-яА-ЯёЁa-zA-Z0-9]+$/g

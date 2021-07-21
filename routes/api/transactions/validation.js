@@ -2,7 +2,16 @@ const Joi = require('joi')
 const mongoose = require('mongoose')
 
 const schemaCreateTransaction = Joi.object({
-  date: Joi.string().required(),
+  // date: {
+  //   day: Joi.string().required(),
+  //   month: Joi.string().required(),
+  //   year: Joi.string().required(),
+  // },
+
+  day: Joi.string().required(),
+  month: Joi.string().required(),
+  year: Joi.string().required(),
+
   type: Joi.string().required(),
   category: Joi.string().required(),
   comment: Joi.string().max(80).required(),

@@ -8,9 +8,35 @@ const { calculationCurrentBalance } = require('../helpers/calculationBalance')
 // }
 
 const listTransactions = async (userId, query) => {
-  const { sortBy, sortByDesk, filter, limit = 10, page = 1 } = query
+  const {
+    sortBy,
+    sortByDesk,
+    filter,
+    month = null,
+    year = null,
+    limit = 10,
+    page = 1,
+  } = query
 
-  const optionsSearch = { owner: userId }
+  // console.log('query ', month)
+  // console.log('24 sortByMonth ', query.sortByMonth)
+
+  // const { month, year } = Transaction.date
+
+  const optionsSearch = {
+    owner: userId,
+    // type: 'WITHDRAW',
+    ...(month && { month }),
+    ...(year && { year }),
+  }
+
+  // if (month !== null && year !== null) {
+  //   optionsSearch.month = month
+  //   optionsSearch.year = year
+  // }
+  // if (year !== null && month === null) {
+  //   optionsSearch.year = year
+  // }
   const results = await Transaction.paginate(optionsSearch, {
     limit,
     page,
