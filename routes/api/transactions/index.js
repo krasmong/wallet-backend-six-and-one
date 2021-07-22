@@ -137,8 +137,8 @@ module.exports = router
  *                        description: Количество денег которе останется после транзакции
  *                        example: 29700
  *
- *      400:
- *        description: Ошибка получения транзакций.
+ *      401:
+ *        description: Ошибка авторизации.
  *      500:
  *        description: Ошибка сервера.
  */
@@ -191,8 +191,8 @@ module.exports = router
  *                        type: string
  *                        description: Категория транзакции.
  *                        example: На хорошее наcтроение
- *      400:
- *        description: Ошибка создания транзакции.
+ *      401:
+ *        description: Ошибка авторизации.
  *      500:
  *        description: Ошибка сервера.
  */
@@ -294,8 +294,8 @@ module.exports = router
  *                      description: Количество денег после совершения транзакции
  *                      example: 30000
  *
- *      400:
- *        description: Ошибка создания транзакции.
+ *      401:
+ *        description: Ошибка авторизации.
  *      500:
  *        description: Ошибка сервера.
  */
