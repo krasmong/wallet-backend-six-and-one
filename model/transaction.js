@@ -65,7 +65,7 @@ const transactionSchema = new Schema(
 // })
 
 transactionSchema.path('comment').validate((value) => {
-  const re = /^[а-яА-ЯёЁa-zA-Z0-9]+$/g
+  const re = /^[а-яА-ЯёЁa-zA-Z0-9 ]+$/g
   return re.test(String(value).toLowerCase())
 })
 
