@@ -1,13 +1,13 @@
-const express = require('express')
+const express = require("express")
 const router = express.Router()
-const ctrl = require('../../../controllers/users')
-const guard = require('../../../helpers/guard')
-const { validateUserCreate, validateUserLogin } = require('./userValidation')
+const ctrl = require("../../../controllers/users")
+const guard = require("../../../helpers/guard")
+const { validateUserCreate, validateUserLogin } = require("./userValidation")
 
-router.post('/signup', validateUserCreate, ctrl.register)
-router.post('/login', validateUserLogin, ctrl.login)
-router.post('/logout', guard, ctrl.logout)
-router.get('/current', guard, ctrl.current)
+router.post("/signup", validateUserCreate, ctrl.register)
+router.post("/login", validateUserLogin, ctrl.login)
+router.post("/logout", guard, ctrl.logout)
+router.get("/current", guard, ctrl.current)
 
 module.exports = router
 
@@ -121,6 +121,7 @@ module.exports = router
  * /api/users/current:
  *  get:
  *    summary: Получить информацию о текущем пользователе
+ *    description: Получить информацию о текущем пользователе
  *    tags:
  *      - Пользователь
  *    parameters:
@@ -133,7 +134,34 @@ module.exports = router
  *
  *    responses:
  *      200:
- *        description: Информация найдена.
+ *        description: Текущий пользователь.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                data:
+ *                  type: object
+ *                  properties:
+ *                    _id:
+ *                      type: string
+ *                      description: ID текущего пользователя
+ *                      example: sdthdfhgmjfgh647u87ijrgdfbvf
+ *                    email:
+ *                      type: string
+ *                      description: email текущего пользователя
+ *                      example: user@mail.com
+ *                    name:
+ *                      type: string
+ *                      description: Имя текущего пользователя
+ *                      example: Васек
+ *                    balance:
+ *                      type: number
+ *                      description: Баланс текущего пользователя
+ *                      example: 10000000000000
+ *
  *      401:
  *        description: Отсутствует заголовок с токеном авторизации.
+ *      500:
+ *        description: Ошибка сервера.
  */
