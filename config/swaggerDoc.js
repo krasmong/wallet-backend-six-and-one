@@ -10,7 +10,7 @@ const options = {
     },
     servers: [
       {
-        url: 'https://fs25on-team7-wallet-beckend.herokuapp.com/',
+        url: 'https://fs25on-team7-wallet-backend.herokuapp.com/',
       },
     ],
   },
