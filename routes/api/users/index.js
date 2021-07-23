@@ -35,9 +35,9 @@ module.exports = router
  *            type: string
  *            description: Пароль.
  *      example:
- *          name: Bruce Wayne
+ *          name: BruceWayne
  *          email: bat@mail.com
- *          password: examplepassword
+ *          password: examplepass
  */
 
 /**
