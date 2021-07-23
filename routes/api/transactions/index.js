@@ -1,9 +1,9 @@
-const express = require('express')
+const express = require("express")
 const router = express.Router()
-const controller = require('../../../controllers/transactions')
-const guard = require('../../../helpers/guard')
+const controller = require("../../../controllers/transactions")
+const guard = require("../../../helpers/guard")
 
-const { validationCreateTransaction } = require('./validation')
+const { validationCreateTransaction } = require("./validation")
 
 router.use((req, res, next) => {
   console.log(req.url)
@@ -11,11 +11,11 @@ router.use((req, res, next) => {
 })
 
 router
-  .get('/', guard, controller.listTransactions)
-  .get('/categories', guard, controller.categoryList)
-  .post('/', guard, validationCreateTransaction, controller.addTransaction)
+  .get("/", guard, controller.listTransactions)
+  .get("/categories", guard, controller.categoryList)
+  .post("/", guard, validationCreateTransaction, controller.addTransaction)
 
-router.get('/:transactionId', controller.getTransactionById)
+// router.get("/:transactionId", controller.getTransactionById)
 
 module.exports = router
 
@@ -26,7 +26,9 @@ module.exports = router
  *    Transaction:
  *      type: object
  *      required:
- *        - date
+ *        - day
+ *        - month
+ *        - year
  *        - type
  *        - category
  *        - amount
@@ -36,9 +38,15 @@ module.exports = router
  *        _id:
  *          type: string
  *          description: Сгенерированный бэкендом уникальный идентификатор.
- *        date:
+ *        day:
  *          type: string
- *          description: Дата транзакции.
+ *          description: День транзакции.
+ *        month:
+ *          type: string
+ *          description: Месяц транзакции.
+ *        year:
+ *          type: string
+ *          description: Год транзакции.
  *        type:
  *          type: string
  *          description: Тип транзакции.
@@ -96,10 +104,18 @@ module.exports = router
  *                        type: string
  *                        description: ID транзакции
  *                        example: kjhvkjhsdvfkshd4563456jvkhgv
- *                      date:
+ *                      day:
  *                        type: string
- *                        description: Дата транзакции
- *                        example: 01.07.2021
+ *                        description: День транзакции
+ *                        example: 01
+ *                      month:
+ *                        type: string
+ *                        description: Месяц транзакции
+ *                        example: 07
+ *                      year:
+ *                        type: string
+ *                        description: Год транзакции
+ *                        example: 2021
  *                      type:
  *                        type: string
  *                        description: Тип транзакции.
@@ -121,18 +137,18 @@ module.exports = router
  *                        description: Количество денег которе останется после транзакции
  *                        example: 29700
  *
- *      400:
- *        description: Ошибка получения транзакций.
+ *      401:
+ *        description: Ошибка авторизации.
  *      500:
  *        description: Ошибка сервера.
  */
 
 /**
  * @swagger
- * /api/transactions/{transactionId}:
+ * /api/transactions/categories:
  *  get:
- *    summary: Получить транзакцию
- *    description: Получить транзакцию по ID транзакции
+ *    summary: Получить категории пользователя
+ *    description: Получить категории пользователя
  *    tags:
  *      - Транзакция
  *    parameters:
@@ -142,51 +158,41 @@ module.exports = router
  *      description: Bearer token текущего пользователя
  *      schema:
  *        type: string
- *    - in: path
- *      name: id
- *      required: true
- *      description: ID транзакции
- *      schema:
- *        type: string
  *    responses:
  *      200:
- *        description: Транзакция полученная по ID транзакции.
+ *        description: Категории транзакций.
  *        content:
  *          application/json:
  *            schema:
  *              type: object
  *              properties:
- *                _id:
- *                  type: string
- *                  description: ID транзакции
- *                  example: kjhvkjhsdvfkshd4563456jvkhgv
- *                date:
- *                  type: string
- *                  description: Дата транзакции
- *                  example: 01.07.2021
- *                type:
- *                  type: string
- *                  description: Тип транзакции.
- *                  example: WITHDRAW
- *                category:
- *                  type: string
- *                  description: Категория транзакции.
- *                  example: На еду
- *                comment:
- *                  type: string
- *                  description: Комментарий для транзакции.
- *                  example: Пельмешки, картофан, корм для котяры
- *                amount:
- *                  type: number
- *                  description: Сумма транзакции.
- *                  example: 300
- *                balance:
- *                  type: number
- *                  description: Количество денег которе останется после транзакции
- *                  example: 29700
-
- *      400:
- *        description: Ошибка создания транзакции.
+ *                data:
+ *                  type: array
+ *                  items:
+ *                    type: object
+ *                    properties:
+ *                      _id:
+ *                        type: string
+ *                        description: ID транзакции
+ *                        example: kjhvkjhsdvfkshd4563456jvkhgv
+ *                      day:
+ *                        type: string
+ *                        description: Дань транзакции
+ *                        example: 01
+ *                      month:
+ *                        type: string
+ *                        description: Месяц транзакции
+ *                        example: 07
+ *                      year:
+ *                        type: string
+ *                        description: Год транзакции
+ *                        example: 2021
+ *                      category:
+ *                        type: string
+ *                        description: Категория транзакции.
+ *                        example: На хорошее наcтроение
+ *      401:
+ *        description: Ошибка авторизации.
  *      500:
  *        description: Ошибка сервера.
  */
@@ -213,10 +219,18 @@ module.exports = router
  *          schema:
  *            type: object
  *            properties:
- *              date:
+ *              day:
  *                type: string
- *                description: Дата транзакции
- *                example: 01.01.2021
+ *                description: День транзакции
+ *                example: 01
+ *              month:
+ *                type: string
+ *                description: Месяц транзакции
+ *                example: 09
+ *              year:
+ *                type: string
+ *                description: Год транзакции
+ *                example: 2021
  *              type:
  *                type: string
  *                description: Тип транзакции.
@@ -247,10 +261,18 @@ module.exports = router
  *                    _id:
  *                      type: string
  *                      description: ID транзакции
- *                    date:
+ *                    day:
  *                      type: string
- *                      description: Дата транзакции
- *                      example: 01.01.2021
+ *                      description: День транзакции
+ *                      example: 01
+ *                    month:
+ *                      type: string
+ *                      description: Месяц транзакции
+ *                      example: 09
+ *                    year:
+ *                      type: string
+ *                      description: Год транзакции
+ *                      example: 2021
  *                    type:
  *                      type: string
  *                      description: Тип транзакции.
@@ -272,8 +294,8 @@ module.exports = router
  *                      description: Количество денег после совершения транзакции
  *                      example: 30000
  *
- *      400:
- *        description: Ошибка создания транзакции.
+ *      401:
+ *        description: Ошибка авторизации.
  *      500:
  *        description: Ошибка сервера.
  */
